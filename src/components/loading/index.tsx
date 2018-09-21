@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Icon } from "@tarojs/components";
+import { View, Icon } from "ui";
 // import { connect } from '@tarojs/redux'
 
 import './index.scss'

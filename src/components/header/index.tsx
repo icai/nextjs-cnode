@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classNames from "classnames";
-import { View, Text } from "@tarojs/components";
+import { View, Text } from "ui";
 import NvMenu from "../menu"
 import Link from "../link"
 

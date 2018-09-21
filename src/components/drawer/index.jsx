@@ -1,5 +1,5 @@
 import Taro from 'react'
-import { View } from '@tarojs/components'
+import { View } from 'ui'
 
 import { AtDrawer } from 'taro-ui'
 

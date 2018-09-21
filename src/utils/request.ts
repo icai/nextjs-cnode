@@ -1,8 +1,8 @@
-import Taro from "react";
+import axios from "axios";
 import * as utils from "../libs/utils";
 
 
-export const post = (options, data?) => {
+export const post =  async (options, data?) => {
   if (typeof options == 'string') {
     options = {
       url: options
@@ -11,18 +11,18 @@ export const post = (options, data?) => {
   if (utils.isObject(data)) {
     options.data = data;
   }
-  return Taro.request({
+  return await axios.request({
     header: {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json"
     },
     ...options,
     data: utils.param(options.data),
-    method: "POST"
+    method: "post"
   });
 }
 
-export const get = (options, data?) => {
+export const get = async (options, data?) => {
   if (typeof options == 'string') {
     options = {
       url: options
@@ -31,5 +31,5 @@ export const get = (options, data?) => {
   if (utils.isObject(data)) {
     options.data = data;
   }
-  return Taro.request({ ...options, method: "GET" });
+  return await axios.request({ ...options, method: "get" });
 }

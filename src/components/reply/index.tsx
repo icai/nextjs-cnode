@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View } from 'ui'
 import * as utils from "../../libs/utils";
 import { withUser } from "../../hoc/router";
 import { AtTextarea, AtInput } from "taro-ui";

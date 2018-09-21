@@ -1,6 +1,6 @@
 import React, { Component, eventCenter } from 'react'
-import { View, Text, Navigator, Image } from '@tarojs/components'
-import Link from "../../components/link";
+import { View, Text, Navigator, Image } from 'ui'
+import Link from "components/link";
 
 import classNames from "classnames";
 

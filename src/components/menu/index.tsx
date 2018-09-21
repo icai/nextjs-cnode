@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "@tarojs/components";
+import { View } from "ui";
 import UserInfo from '../user-info';
 import classNames from "classnames";
 import Drawer from '../drawer'

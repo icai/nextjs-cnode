@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import { View, Text } from 'ui'
 import { Topic } from "../topic";
 import { ITopic } from "../../interfaces/topic";
 

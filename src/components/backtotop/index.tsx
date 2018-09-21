@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import React, { Component } from 'react'
-import { View } from '@tarojs/components'
+import { View } from 'ui'
 import { throttle } from 'throttle-debounce';
 
 import './index.scss'

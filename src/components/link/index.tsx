@@ -1,4 +1,4 @@
-import { View } from "@tarojs/components";
+import { View } from "ui";
 import React, { Component, Config } from "react";
 import * as utils from '../../libs/utils';
 

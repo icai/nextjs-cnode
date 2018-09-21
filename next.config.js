@@ -3,7 +3,7 @@ const withTypescript = require("@zeit/next-typescript")
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const path = require('path');
 const Dotenv = require('dotenv-webpack')
-const NODE_ENV = process.env.NODE_ENV;
+const NODE_ENV = process.env.NODE_ENV
 
 module.exports = withTypescript({
 
@@ -18,6 +18,13 @@ module.exports = withTypescript({
       tsconfig: path.resolve('./tsconfig.json')
     }))
 
+    config.resolve = config.resolve || {}
+
+    config.resolve.alias['components'] = path.resolve('./src/components')
+    config.resolve.alias['ui'] = path.resolve('./src/ui/index')
+    config.resolve.alias['utils'] = path.resolve('./src/utils')
+    config.resolve.alias['interfaces'] = path.resolve('./src/interfaces')
+    
     // config env variable
     // examle <div>{ process.env.TEST }</div>
     config.plugins = [

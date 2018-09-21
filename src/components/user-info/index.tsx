@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import React, { Component, Config } from 'react'
-import { View, Button, Image, Text } from "@tarojs/components";
-import Link from "../../components/link";
+import { View, Button, Image, Text } from "ui";
+import Link from "components/link";
 import { connect } from '@tarojs/redux'
 import * as actions from "../../actions/auth";
 import { IAuth } from "../../interfaces/auth";
