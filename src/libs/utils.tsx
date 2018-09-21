@@ -2,10 +2,10 @@
 
 // import _ from 'lodash';
 import Timeago from "timeago.js";
-import Taro from "@tarojs/taro";
+import Taro from "react";
 import { ITopic } from "../interfaces/topic";
 
-import { eventCenter } from "@tarojs/taro";
+import { eventCenter } from "react";
 
 export const updateObject = (oldObject, updatedProperties) => {
   return {

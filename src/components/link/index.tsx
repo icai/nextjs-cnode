@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components";
-import Taro, { Component, Config } from "@tarojs/taro";
+import React, { Component, Config } from "react";
 import * as utils from '../../libs/utils';
 
 type IProps = {

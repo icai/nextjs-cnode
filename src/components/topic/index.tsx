@@ -1,4 +1,4 @@
-import Taro, { Component, eventCenter } from '@tarojs/taro'
+import React, { Component, eventCenter } from 'react'
 import { View, Text, Navigator, Image } from '@tarojs/components'
 import Link from "../../components/link";
 

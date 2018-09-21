@@ -14,6 +14,4 @@ npm run dev
 
 ## License
 
-The MIT License
-
-Copyright (c) 2018 Terry Cai
+Copyright (c) 2018 Terry Cai. Licensed under the MIT license.

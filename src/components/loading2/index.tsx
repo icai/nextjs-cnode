@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components";
-import { Component } from "@tarojs/taro";
+import { Component } from "react";
 import { AtActivityIndicator } from "taro-ui";
 import "./index.scss";
 

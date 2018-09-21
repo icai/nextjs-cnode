@@ -1,5 +1,5 @@
 import { IStore } from "../../interfaces/store";
-import Taro from "@tarojs/taro";
+import Taro from "react";
 
 class Store implements IStore {
   removeItem(key) {

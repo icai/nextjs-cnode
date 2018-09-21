@@ -1,4 +1,4 @@
-import Taro, { Component } from "@tarojs/taro";
+import React, { Component } from "react";
 import { View } from "@tarojs/components";
 import UserInfo from '../user-info';
 import classNames from "classnames";

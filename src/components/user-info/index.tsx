@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import React, { Component, Config } from 'react'
 import { View, Button, Image, Text } from "@tarojs/components";
 import Link from "../../components/link";
 import { connect } from '@tarojs/redux'

@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react'
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import { throttle } from 'throttle-debounce';
 

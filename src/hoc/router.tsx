@@ -1,5 +1,5 @@
 import { ComponentClass } from "react";
-import Taro, { Component } from "@tarojs/taro";
+import React, { Component } from "react";
 import { connect } from "@tarojs/redux";
 import * as actions from "../actions/auth";
 import { IAuth } from "../interfaces/auth";

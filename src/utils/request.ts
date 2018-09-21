@@ -1,4 +1,4 @@
-import Taro from "@tarojs/taro";
+import Taro from "react";
 import * as utils from "../libs/utils";
 
 

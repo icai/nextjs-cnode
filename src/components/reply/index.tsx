@@ -1,5 +1,5 @@
 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import * as utils from "../../libs/utils";
 import { withUser } from "../../hoc/router";

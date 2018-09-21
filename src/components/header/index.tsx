@@ -1,4 +1,4 @@
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import classNames from "classnames";
 import { View, Text } from "@tarojs/components";
 import NvMenu from "../menu"
