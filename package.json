@@ -4,9 +4,9 @@
   "description": "next.js 7 cnode",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "dev": "nodemon server/index.ts",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "NODE_ENV=production node .next/production-server/index.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,8 @@
     "@types/next": "^6.1.7",
     "@types/react": "^16.4.14",
     "fork-ts-checker-webpack-plugin": "^0.4.9",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
   }
 }
