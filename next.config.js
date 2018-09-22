@@ -21,6 +21,7 @@ module.exports = withCSS(
 
       config.resolve = config.resolve || {}
 
+      config.resolve.alias['assets'] = path.resolve('./src/assets')
       config.resolve.alias['components'] = path.resolve('./src/components')
       config.resolve.alias['ui'] = path.resolve('./src/ui/index')
       config.resolve.alias['hoc'] = path.resolve('./src/hoc')

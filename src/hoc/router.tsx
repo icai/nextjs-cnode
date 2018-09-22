@@ -27,11 +27,10 @@ function withUser(WrappedComponent, allowNologin = false) {
     static async getInitialProps(context) {
       const { reduxStore, req } = context;
       
-
       const log = reduxStore.dispatch(actions.authCheckState());
-      console.info(log);
-
-      if (!log) {
+      
+      if (!(allowNologin || log)) {
+        console.info('bbbb-------------------------------------')
         // Already signed in? No need to continue.
         // Throw them back to the main page
         redirect(context, "/login");

@@ -1,10 +1,10 @@
 import { ComponentClass } from 'react'
-import React, { Component, Config } from 'react'
+import React, { Component } from 'react'
 import { View } from 'ui'
 import Header from 'components/header/index'
-// import {  AtInput } from 'taro-ui'
 import { withUser } from "hoc/router";
 import * as utils from "libs/utils";
+import Layout from 'components/layout';
 
 import './index.scss'
 
@@ -42,11 +42,11 @@ class Login extends Component {
   }
   render() {
     const { token } = this.state;
-    return <View className="login-page">
+    return <Layout className="login-page" title="登录">
         <Header pageType={"登录"} fixHead={true} needAdd={true} />
         <View className="page-body">
           <View className="label">
-          <input className="txt" type="text" placeholder="Access Token" value={token} onChange={this.handleChange.bind(this)} maxlength="36" />
+            <input className="txt" type="text" placeholder="Access Token" value={token} onChange={this.handleChange.bind(this)} maxlength="36" />
           </View>
           <View className="label">
             <View className="button" onClick={this.logon}>
@@ -54,7 +54,7 @@ class Login extends Component {
             </View>
           </View>
         </View>
-      </View>;
+      </Layout>;
   }
 }
 
