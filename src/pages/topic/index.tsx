@@ -80,7 +80,7 @@ class Topic extends Component {
     const { userInfo } = this.props;
     const { topic } = this.state;
     if (!userInfo.userId) {
-      utils.utils.navigateTo({
+      utils.navigateTo({
         url: "/login",
         params: {
           redirect: encodeURIComponent(this.$router.fullUrl)
