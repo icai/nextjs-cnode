@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text } from 'ui'
-import { Topic } from "../topic";
-import { ITopic } from "../../interfaces/topic";
+import { View } from 'ui'
+import { Topic } from "components/topic";
+import { ITopic } from "interfaces/topic";
 
 
 import '../topic/index.scss'

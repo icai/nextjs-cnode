@@ -16,7 +16,9 @@ import Link from "next/link";
 import Head from "next/head";
 import { withRouter } from "next/router";
 
-import '../../assets/scss/app.scss';
+import Layout from "components/layout";
+
+
 
 import "./index.scss";
 
@@ -167,21 +169,19 @@ class List extends Component<IProps, IState> {
 
     render() {
         const { searchKey, topics, loading } = this.state;
-        return <View className="flex-wrp">
+        return <Layout>
             <Head>
               <title>首页</title>
-              <meta charSet="utf-8" />
-              <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Header pageType={this.getTitleStr(searchKey.tab)} fixHead={true} needAdd={true} />
             <View id="page">
               <View className="posts-list">
-                {/* <TopicsList topics={topics} loading={loading} /> */}
+                <TopicsList topics={topics}  />
               </View>
-              {/* {loading && searchKey.page > 1 && <Loading height="20vh" />} */}
+              {loading && searchKey.page > 1 && <Loading height="20vh" />}
             </View>
             {/* <BackTop /> */}
-          </View>;
+        </Layout>;
     }
 }
 

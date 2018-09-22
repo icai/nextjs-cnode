@@ -1,14 +1,11 @@
 import React, { Component, eventCenter } from 'react'
-import { View, Text, Navigator, Image } from 'ui'
+import { View, Text, Image } from 'ui'
 import Link from "components/link";
 
-import classNames from "classnames";
+
 
 // import api from '../lib/utils/api'
 import * as utils from '../../libs/utils'
-// import { IMember } from '../../interfaces/member'
-// import { INode } from '../../interfaces/node';
-// import { IAuthor } from "../../interfaces/author";
 import { ITopic } from "../../interfaces/topic";
 
 import './index.scss'

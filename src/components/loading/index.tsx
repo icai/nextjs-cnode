@@ -1,30 +1,44 @@
 import React, { Component } from 'react'
-import { View, Icon } from "ui";
-// import { connect } from '@tarojs/redux'
+import { View } from "ui";
+import PropTypes from "prop-types";
 
 import './index.scss'
 
-interface IProps {
-  showTxt?: string
-  show: boolean
-}
+export default class Loading extends Component {
+  static defaultProps = {
+    size: '18',
+    color: '#fff'
+  }
 
+  static propTypes = {
+    size: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
+    color: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ])
+  }
 
-class Loading extends Component<IProps, {}> {
   render() {
-    const { showTxt, show } = this.props;
+    const { color, size } = this.props
+    const sizeStyle = {
+      width: `${size}px`,
+      height: `${size}px`
+    }
+    const colorStyle = {
+      'border': `1px solid ${color}`,
+      'border-color': `${color} transparent transparent transparent`
+    }
+    const ringStyle = Object.assign({}, colorStyle, sizeStyle)
+
     return (
-      <View>
-        {show ? <View id="wxloading" className="wx_loading">
-          <View className="wx_loading_inner">
-            <i class="wx_loading_icon"></i>
-            {showTxt}...
-          </View>
-        </View> : ''}
+      <View className='at-loading' style={sizeStyle}>
+        <View className='at-loading__ring' style={ringStyle}></View>
+        <View className='at-loading__ring' style={ringStyle}></View>
+        <View className='at-loading__ring' style={ringStyle}></View>
       </View>
-    );
+    )
   }
 }
-
-
-export default Loading;
