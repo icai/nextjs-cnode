@@ -1,4 +1,4 @@
-import Taro from "react";
+import React from "react";
 import * as actionTypes from "../constants/auth";
 import { post, get } from "../utils/request";
 import store from "../utils/store";

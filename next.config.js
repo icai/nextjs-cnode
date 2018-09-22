@@ -23,7 +23,9 @@ module.exports = withCSS(
 
       config.resolve.alias['components'] = path.resolve('./src/components')
       config.resolve.alias['ui'] = path.resolve('./src/ui/index')
+      config.resolve.alias['hoc'] = path.resolve('./src/hoc')
       config.resolve.alias['utils'] = path.resolve('./src/utils')
+      config.resolve.alias['libs'] = path.resolve('./src/libs')
       config.resolve.alias['interfaces'] = path.resolve('./src/interfaces')
 
       // config env variable

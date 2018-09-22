@@ -28,7 +28,7 @@ class Topic extends Component<IProps, {}> {
 
     const classnames = 'stitle ' + this.getTabInfo(tab, good, top, true)
     const tit = this.getTabInfo(tab, good, top, false)
-    return <Link className="topic" to={{ url: '/pages/topic/index?id=' + id }}>
+    return <Link className="topic" to={{ url: '/topic?id=' + id }}>
         <h3 className={classnames} title={tit}>
           {title}
         </h3>

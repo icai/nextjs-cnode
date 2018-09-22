@@ -4,15 +4,15 @@ import React from 'react'
 import './index.scss';
 
 export const View = (props)=> {
-    const { children, className } = props;
-    return <div className={className} {...props}>
+    const { children, className, ...reset } = props;
+    return <div className={className} {...reset}>
         {children}
       </div>;
 }
 
 export const Text = (props) => {
-    const { children, className } = props;
-    return <span className={className} {...props}>
+    const { children, className, ...reset } = props;
+    return <span className={className} {...reset}>
         {children}
     </span>;
 }

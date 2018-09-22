@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import React, { Component, Config } from 'react'
 import { View, Button, Image, Text } from "ui";
 import Link from "components/link";
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import * as actions from "../../actions/auth";
 import { IAuth } from "../../interfaces/auth";
 
@@ -49,11 +49,11 @@ class UserInfo extends Component<IProps, PageState> {
   render() {
     const userInfo = this.props.userInfo;
     return <View className="user-info">
-        {!userInfo.loginname ? <Link className="login-no" to={{ url: "/pages/login/index" }}>
+        {!userInfo.loginname ? <Link className="login-no" to={{ url: "/login" }}>
             <View className="login">
               <View>登录</View>
             </View>
-          </Link> : <Link className="login-yes" to={{ url: "/pages/user/index", params: { loginname: userInfo.loginname } }}>
+          </Link> : <Link className="login-yes" to={{ url: "/user", params: { loginname: userInfo.loginname } }}>
             <View className="avertar">
               {userInfo.avatar_url ? (
                 <Image class="avertar" src={userInfo.avatar_url} />

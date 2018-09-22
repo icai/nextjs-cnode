@@ -1,8 +1,10 @@
 import { ComponentClass } from "react";
 import React, { Component } from "react";
-import { connect } from "@tarojs/redux";
+import { connect } from "react-redux";
 import * as actions from "../actions/auth";
 import { IAuth } from "../interfaces/auth";
+import * as utils from 'libs/utils'
+import redirect from "./redirect";
 
 type PageStateProps = {
   userInfo: IAuth;
@@ -21,17 +23,26 @@ type PageState = {};
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 function withUser(WrappedComponent, allowNologin = false) {
-  @connect( ({ auth }) => ({ userInfo: auth }),
-    (dispatch: Function) => ({
-      authLogin: (...args) => dispatch(actions.auth(...args)),
-      authCheckState: () => dispatch(actions.authCheckState())
-    })
-  )
   class WithUserHOC extends WrappedComponent<IProps, PageState> {
+    static async getInitialProps(context) {
+      const { reduxStore, req } = context;
+      
+
+      const log = reduxStore.dispatch(actions.authCheckState());
+      console.info(log);
+
+      if (!log) {
+        // Already signed in? No need to continue.
+        // Throw them back to the main page
+        redirect(context, "/login");
+      }
+
+      return {}
+    }
     constructor() {
       super(...arguments);
-      this.props.authCheckState();
     }
+    
     isSuperRender() {
       const props = this.props;
       return allowNologin || (props.userInfo && props.userInfo.userId)
@@ -39,7 +50,7 @@ function withUser(WrappedComponent, allowNologin = false) {
     // refer  https://github.com/ReactTraining/react-router/blob/master/packages/react-router/modules/Redirect.js
     perform() {
       if (!this.isSuperRender()) {
-        Taro.redirectTo({ url: "/pages/login/index" });
+        utils.redirectTo({ url: "/login" });
       }
     }
     componentWillMount() {
@@ -53,7 +64,12 @@ function withUser(WrappedComponent, allowNologin = false) {
       }
     }
   };
-  return WithUserHOC;
+  return connect(({ auth }) => ({ userInfo: auth }),
+    (dispatch: Function) => ({
+      authLogin: (token) => dispatch(actions.auth(token)),
+      authCheckState: () => dispatch(actions.authCheckState())
+    })
+  )(WithUserHOC);
 }
 
 

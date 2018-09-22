@@ -31,5 +31,5 @@ export const get = async (options, data?) => {
   if (utils.isObject(data)) {
     options.data = data;
   }
-  return await axios.request({ ...options, method: "get" });
+  return await axios.get(options.url, { ...options, params: options.data });
 }

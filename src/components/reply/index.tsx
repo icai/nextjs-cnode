@@ -34,7 +34,7 @@ class Reply extends Component<Iprops, PageState> {
     hasErr: false,
     content: "",
     author_txt:
-      "\n\n 来自拉风的 [Taro-cnode](https://github.com/icai/taro-cnode)"
+      "\n\n 来自拉风的 [React-cnode](https://github.com/icai/taro-cnode)"
   };
 
   componentWillReceiveProps(nextProps) {
@@ -108,7 +108,7 @@ class Reply extends Component<Iprops, PageState> {
               this.props.onClose();
             }
           } else {
-            Taro.showToast({ title: res.error_msg });
+            utils.showToast({ title: res.error_msg });
           }
         })
         .catch(resp => {
@@ -133,7 +133,7 @@ class Reply extends Component<Iprops, PageState> {
 
 // #region 导出注意
 //
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
+// 经过上面的声明后需要将导出的 React.Component 子类修改为子类本身的 props 属性
 // 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
 //
 // #endregion

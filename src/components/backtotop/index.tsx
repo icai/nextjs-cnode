@@ -23,7 +23,7 @@ class BackTop extends Component {
   componentScrollBox;
   constructor() {
     super(...arguments);
-    if (Taro.getEnv() == 'WEB') {
+    if (React.getEnv() == 'WEB') {
       this.componentScrollBox = document.documentElement;
     }
   }
@@ -32,13 +32,13 @@ class BackTop extends Component {
   };
 
   componentWillUnmount() {
-    if (Taro.getEnv() == 'WEB') {
+    if (React.getEnv() == 'WEB') {
       window.removeEventListener("scroll", this.scrollbinding);
     }
   }
 
   componentDidMount() {
-    if (Taro.getEnv() == 'WEB') {
+    if (React.getEnv() == 'WEB') {
       this.scrollbinding = throttle(300, this.handleScroll);
       window.addEventListener("scroll", this.scrollbinding);
     }
@@ -59,10 +59,10 @@ class BackTop extends Component {
   }
 
   goTop = () => {
-    if (Taro.getEnv() == 'WEB') {
+    if (React.getEnv() == 'WEB') {
       this.componentScrollBox.scrollTop = 0;
-    } else if (Taro.getEnv() == 'WEAPP') {
-      Taro.pageScrollTo({
+    } else if (React.getEnv() == 'WEAPP') {
+      React.pageScrollTo({
         scrollTop: 0
       })
     }

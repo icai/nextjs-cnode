@@ -66,7 +66,7 @@ class Header extends Component<IProps, IState> {
             {messageCount > 0 ? <Text className="num">
                 {messageCount}
               </Text> : ""}
-          {(needAdd && !messageCount) || messageCount <= 0 ? <Link className="iconfont add-icon" to={{url: "/pages/add/index"}} >
+          {(needAdd && !messageCount) || messageCount <= 0 ? <Link className="iconfont add-icon" to={{url: "/add"}} >
                 &#xe60f;
               </Link> : ""}
           </View>

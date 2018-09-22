@@ -27,25 +27,25 @@ class NvMenu extends Component<IProps, {}> {
         <Drawer mask={false} show={showMenu}>
           {/* <UserInfo /> */}
           <View className="list-ul">
-            <Link className="icon-quanbu iconfont item" to={{ url: "/pages/list/index?tab=all" }}>
+            <Link className="icon-quanbu iconfont item" to={{ url: "/list?tab=all" }}>
               全部
             </Link>
-            <Link className="icon-hao iconfont item" to={{ url: "/pages/list/index?tab=good" }}>
+            <Link className="icon-hao iconfont item" to={{ url: "/list?tab=good" }}>
               精华
             </Link>
-            <Link className="icon-fenxiang iconfont item" to={{ url: "/pages/list/index?tab=share" }}>
+            <Link className="icon-fenxiang iconfont item" to={{ url: "/list?tab=share" }}>
               分享
             </Link>
-            <Link className="icon-wenda iconfont item" to={{ url: "/pages/list/index?tab=ask" }}>
+            <Link className="icon-wenda iconfont item" to={{ url: "/list?tab=ask" }}>
               问答
             </Link>
-            <Link className="icon-zhaopin iconfont item" to={{ url: "/pages/list/index?tab=job" }}>
+            <Link className="icon-zhaopin iconfont item" to={{ url: "/list?tab=job" }}>
               招聘
             </Link>
-            <Link className="icon-xiaoxi iconfont item line" to={{ url: "/pages/message/index" }}>
+            <Link className="icon-xiaoxi iconfont item line" to={{ url: "/message" }}>
               消息
             </Link>
-            <Link className="icon-about iconfont item" to={{ url: "/pages/about/index" }}>
+            <Link className="icon-about iconfont item" to={{ url: "/about" }}>
               关于
             </Link>
           </View>

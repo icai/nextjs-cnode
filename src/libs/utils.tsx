@@ -2,10 +2,9 @@
 
 // import _ from 'lodash';
 import Timeago from "timeago.js";
-import Taro from "react";
+import React from "react";
 import { ITopic } from "../interfaces/topic";
-
-import { eventCenter } from "react";
+import Router from "next/router";
 
 export const updateObject = (oldObject, updatedProperties) => {
   return {
@@ -25,10 +24,18 @@ export const isObject = (obj)=> {
 }
 
 export const navigateTo = ({ url, params }) => {
-  Taro.navigateTo({
-    url: url + (params ? "?" + param(params) : "")
-  });
+  const href = url + (params ? "?" + param(params) : "")
+  Router.push(href);
 };
+
+export const redirectTo = ({ url, params }) => {
+  const href = url + (params ? "?" + param(params) : "");
+  Router.replace(href);
+};
+
+export const showToast = ({ title }) => {
+  alert(title);
+}
 
 
 let getCheck = {

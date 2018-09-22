@@ -4,7 +4,7 @@ import React, { Component } from "react";
 
 import { View } from "ui";
 import { TopicsList } from "components/topics";
-import Header from "components/header/index";
+import Header from "components/header";
 import { throttle } from "throttle-debounce";
 import { ITopic } from "interfaces/topic";
 import BackTop from "components/backtotop";
@@ -13,9 +13,8 @@ import { get } from "utils/request";
 import Loading from "components/loading2";
 
 import Link from "next/link";
-import Head from "next/head";
 import { withRouter } from "next/router";
-
+import Head from "next/head";
 import Layout from "components/layout";
 
 
@@ -52,27 +51,31 @@ class List extends Component<IProps, IState> {
 
     constructor(props) {
         super(props);
+        this.state = props.state;
+    }
+    static getInitialProps({ query: { tab } }) {
+        return {
+            state: {
+                scroll: true,
+                topics: [],
+                index: {},
+                loading: true,
+                searchDataStr: "",
+                searchKey: {
+                    page: 1,
+                    limit: 20,
+                    tab: tab,
+                    mdrender: true
+                } 
+            }
+        };
     }
 
-    state = {
-        scroll: true,
-        topics: [],
-        index: {},
-        searchKey: {
-            page: 1,
-            limit: 20,
-            tab: "all",
-            mdrender: true
-        },
-        loading: true,
-        searchDataStr: ""
-    };
     index = {};
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this.throttledScrollHandler);
     }
-
     componentDidMount() {
         this.componentScrollBox = document.documentElement;
         this.throttledScrollHandler = throttle(300, this.getScrollData);
@@ -141,7 +144,7 @@ class List extends Component<IProps, IState> {
                 }
             });
         } catch (error) {
-            // Taro.showToast({
+            // utils.showToast({
             //     title: "载入远程数据错误"
             // });
         }

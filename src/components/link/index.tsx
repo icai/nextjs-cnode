@@ -1,5 +1,7 @@
 import { View } from "ui";
-import React, { Component, Config } from "react";
+import React, { Component } from "react";
+import Router, { withRouter } from "next/router";
+
 import * as utils from '../../libs/utils';
 
 type IProps = {
@@ -25,10 +27,10 @@ class Link extends Component<IProps, PageState> {
   };
 
   goTo = ({ url, params }) => {
-    Taro.navigateTo({
-      url: url + (params ? "?" + utils.param(params) : "")
-    });
-    return false;
+    const href = url + (params ? "?" + utils.param(params) : "")
+    Router.push(href);
+    // window.location.href = href;
+    // return false;
   };
   render() {
     const props = this.props;
@@ -43,4 +45,4 @@ class Link extends Component<IProps, PageState> {
   }
 }
 
-export default Link;
+export default withRouter(Link);
