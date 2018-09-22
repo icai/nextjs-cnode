@@ -1,27 +1,23 @@
-import Taro from 'react'
+import React, { Component } from "react";
 import { View } from 'ui'
 
-import { AtDrawer } from 'taro-ui'
-
-
-
-export default class Drawer extends AtDrawer {
-  constructor () {
+export default class Drawer extends Component {
+  constructor() {
     super(...arguments)
-    // this.state = { animShow: false }
-    // if (this.props.show) this.animShow()
+    this.state = { animShow: false }
+    if (this.props.show) this.animShow()
   }
   // onItemClick (index, e) {
   //   this.props.onItemClick && this.props.onItemClick(index)
   //   this.animHide(e, index)
   // }
 
-  onHide () {
+  onHide() {
     this.setState({ show: false })
     this.props.onClose && this.props.onClose()
   }
 
-  animHide () {
+  animHide() {
     this.setState({
       animShow: false,
     })
@@ -31,28 +27,28 @@ export default class Drawer extends AtDrawer {
     }, 300)
   }
 
-  // animShow () {
-  //   this.setState({ show: true })
-  //   setTimeout(() => {
-  //     this.setState({
-  //       animShow: true,
-  //     })
-  //   }, 200)
-  // }
+  animShow() {
+    this.setState({ show: true })
+    setTimeout(() => {
+      this.setState({
+        animShow: true,
+      })
+    }, 200)
+  }
 
-  // onMaskClick () {
-  //   this.animHide(...arguments)
-  // }
+  onMaskClick() {
+    this.animHide(...arguments)
+  }
 
-  // componentWillReceiveProps (props) {
-  //   const { show } = props
-  //   if (show !== this.props.show) {
-  //     if (show) this.animShow()
-  //     else this.animHide(...arguments)
-  //   }
-  // }
+  componentWillReceiveProps(props) {
+    const { show } = props
+    if (show !== this.props.show) {
+      if (show) this.animShow()
+      else this.animHide(...arguments)
+    }
+  }
 
-  render () {
+  render() {
     const {
       mask,
       width,
@@ -80,12 +76,12 @@ export default class Drawer extends AtDrawer {
     rootClassName = rootClassName.filter(str => str !== '')
 
     return (
-      show && <View className={rootClassName}>
+      show ? <View className={rootClassName}>
         <View className='at-drawer__mask' style={maskStyle} onClick={this.onMaskClick.bind(this)}></View>
         <View className='at-drawer__content' style={listStyle}>
           {this.props.children}
         </View>
-      </View>
+      </View> : <div></div>
     )
   }
 }

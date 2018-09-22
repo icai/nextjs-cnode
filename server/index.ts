@@ -14,7 +14,11 @@ const dev = process.env.NODE_ENV !== 'production'
 // quiet (bool) Hide error messages containing server information - default false
 // conf (object) the same object you would use in next.config.js - default {}
 
-const app = next({ dir: './src', dev })
+const app = next({ dir: './src', 
+
+
+
+dev })
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {

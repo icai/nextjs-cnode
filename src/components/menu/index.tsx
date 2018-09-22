@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View } from "ui";
-import UserInfo from '../user-info';
+// import UserInfo from '../user-info';
 import classNames from "classnames";
 import Drawer from '../drawer'
 import Link from "../link"
@@ -25,7 +25,7 @@ class NvMenu extends Component<IProps, {}> {
     });
     return <View id="sideBar" className={classnames}>
         <Drawer mask={false} show={showMenu}>
-          <UserInfo />
+          {/* <UserInfo /> */}
           <View className="list-ul">
             <Link className="icon-quanbu iconfont item" to={{ url: "/pages/list/index?tab=all" }}>
               全部

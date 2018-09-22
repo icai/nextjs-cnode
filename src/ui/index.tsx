@@ -4,3 +4,10 @@ export const View = (props)=> {
         {children}
       </div>;
 }
+
+export const Text = (props) => {
+    const { children, className } = props;
+    return <span className={className} {...props}>
+        {children}
+    </span>;
+}
