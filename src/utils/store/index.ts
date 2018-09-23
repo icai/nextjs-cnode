@@ -1,4 +1,4 @@
-import { IStore } from "../../interfaces/store";
+import { IStore } from "interfaces/store";
 const isServer = typeof window === "undefined";
 class Store implements IStore {
   removeItem(key) {

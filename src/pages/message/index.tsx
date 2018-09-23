@@ -1,12 +1,12 @@
 import { ComponentClass } from 'react'
 import React, { Component, Config } from "react";
-import { withUser } from "../../hoc/router";
+import { withUser } from "hoc/router";
 import { View, Image, Text, ScrollView } from 'ui';
-import Link from "../../components/link";
-import Header from '../../components/header/index'
+import Link from "components/link";
+import Header from 'components/header/index'
 import classNames from "classnames";
-import * as utils from '../../libs/utils';
-import { post, get } from "../../utils/request";
+import * as utils from 'libs/utils';
+import { post, get } from "utils/request";
 
 
 import './index.scss'

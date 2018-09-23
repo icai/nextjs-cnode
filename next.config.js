@@ -28,6 +28,7 @@ module.exports = withCSS(
       config.resolve.alias['utils'] = path.resolve('./src/utils')
       config.resolve.alias['libs'] = path.resolve('./src/libs')
       config.resolve.alias['interfaces'] = path.resolve('./src/interfaces')
+      config.resolve.alias['actions'] = path.resolve('./src/actions')
 
       // config env variable
       // examle <div>{ process.env.TEST }</div>

@@ -1,15 +1,15 @@
 import { ComponentClass } from 'react';
 import React, { Config } from "react";
-import { Component } from "../../hoc/router";
+import { Component } from "hoc/router";
 import { View, Image, Text } from 'ui';
 import { connect } from 'react-redux';
-import Header from "../../components/header/index";
-import Link from '../../components/link';
+import Header from "components/header/index";
+import Link from 'components/link';
 import classNames from "classnames";
-import * as actions from "../../actions/auth";
-import * as utils from '../../libs/utils';
-import { get } from "../../utils/request";
-import { IAuth } from "../../interfaces/auth";
+import * as actions from "actions/auth";
+import * as utils from 'libs/utils';
+import { get } from "utils/request";
+import { IAuth } from "interfaces/auth";
 
 import './index.scss'
 

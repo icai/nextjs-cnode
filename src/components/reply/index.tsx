@@ -1,11 +1,11 @@
 
 import React, { Component } from 'react'
 import { View } from 'ui'
-import * as utils from "../../libs/utils";
-import { withUser } from "../../hoc/router";
+import * as utils from "libs/utils";
+import { withUser } from "hoc/router";
 import classNames from "classnames";
 import update from "immutability-helper";
-import { post, get } from "../../utils/request";
+import { post, get } from "utils/request";
 import './index.scss'
 
 const markdown = require("markdown").markdown;

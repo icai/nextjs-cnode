@@ -3,8 +3,8 @@ import React, { Component, Config } from 'react'
 import { View, Button, Image, Text } from "ui";
 import Link from "components/link";
 import { connect } from 'react-redux'
-import * as actions from "../../actions/auth";
-import { IAuth } from "../../interfaces/auth";
+import * as actions from "actions/auth";
+import { IAuth } from "interfaces/auth";
 
 
 import './index.scss'

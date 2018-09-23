@@ -10,6 +10,14 @@ export const View = (props)=> {
       </div>;
 }
 
+export const ScrollView = (props) => {
+    const { children, className, ...reset } = props;
+    return <div className={className} {...reset}>
+        {children}
+    </div>;
+}
+
+
 export const Text = (props) => {
     const { children, className, ...reset } = props;
     return <span className={className} {...reset}>
@@ -28,12 +36,12 @@ interface Imageprops {
 }
 
 export const Image = ({ className, src, style, mode, onLoad, onError, ...reset }: Imageprops) => {
-         const cls = classNames("taro-img", { "taro-img__widthfix": mode === "widthFix" }, className);
-         const imgCls = "taro-img__mode-" + (mode || "scaleToFill")
-             .toLowerCase()
-             .replace(/\s/g, "");
+    const cls = classNames("taro-img", { "taro-img__widthfix": mode === "widthFix" }, className);
+    const imgCls = "taro-img__mode-" + (mode || "scaleToFill")
+        .toLowerCase()
+        .replace(/\s/g, "");
 
-         return <div className={cls} style={style} {...reset}>
-             <img className={imgCls} src={src} onLoad={onLoad} onError={onError} />
-           </div>;
-       };
+    return <div className={cls} style={style} {...reset}>
+        <img className={imgCls} src={src} onLoad={onLoad} onError={onError} />
+    </div>;
+};

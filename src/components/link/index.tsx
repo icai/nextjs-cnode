@@ -2,7 +2,7 @@ import { View } from "ui";
 import React, { Component } from "react";
 import Router, { withRouter } from "next/router";
 
-import * as utils from '../../libs/utils';
+import * as utils from 'libs/utils';
 
 type IProps = {
   props: {

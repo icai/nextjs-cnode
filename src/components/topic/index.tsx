@@ -5,8 +5,8 @@ import Link from "components/link";
 
 
 // import api from '../lib/utils/api'
-import * as utils from '../../libs/utils'
-import { ITopic } from "../../interfaces/topic";
+import * as utils from 'libs/utils'
+import { ITopic } from "interfaces/topic";
 
 import './index.scss'
 
