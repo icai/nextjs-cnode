@@ -23,6 +23,14 @@ export const isObject = (obj)=> {
   return typeOf(obj) === "object";
 }
 
+export const isEmptyObject = (obj) => {
+  let name;
+  for (name in obj) {
+    return false;
+  }
+  return true;
+}
+
 export const navigateTo = ({ url, params }) => {
   const href = url + (params ? "?" + param(params) : "")
   Router.push(href);

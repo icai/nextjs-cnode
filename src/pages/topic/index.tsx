@@ -50,16 +50,18 @@ interface IState  {
 class Topic extends Component<IProps, IState> {
 
   static async getInitialProps({ query: { id } }) {
-
-    const topic = await get({
-      url: "https://cnodejs.org/api/v1/topic/" + id
-    })
-    console.info(topic)
+    let stopic = {}
+    if (utils.isServer) {
+      const topic = await get({
+        url: "https://cnodejs.org/api/v1/topic/" + id
+      })
+      stopic = topic.data.data;
+    }
     return {
       state : {
         showMenu: false,
         noData: false,
-        topic: topic.data.data,
+        topic: stopic,
         topicId: id,
       } 
     };
@@ -91,7 +93,9 @@ class Topic extends Component<IProps, IState> {
     this.state = props.state;
   }
   componentDidMount() {
-    this.getTopic();
+    if (utils.isEmptyObject(this.state.topic)) {
+      this.getTopic();
+    }
   }
   addReply(id) {
     this.setState({ curReplyId: id });
@@ -154,7 +158,6 @@ class Topic extends Component<IProps, IState> {
     });
   };
   render() {
-    console.info(this.props)
     const { noData, topicId, showMenu, curReplyId, topic } = this.state || this.props.state;
     const { userInfo } = this.props;
     const getLastTimeStr = (Text, ago) => {
@@ -167,16 +170,10 @@ class Topic extends Component<IProps, IState> {
     const isUps = ups => {
       return ups.includes((userInfo || {}).userId);
     };
-    const replayList = topic.replies.map((item, index) => {
-      return (
-        <View className="li flex-wrp" key={index}>
+    const replayList = topic.replies && topic.replies.map((item, index) => {
+      return <View className="li flex-wrp" key={index}>
           <View className="user">
-            <Link
-              to={{
-                url: "/user",
-                params: { loginname: item.author.loginname }
-              }}
-            >
+            <Link to={{ url: "/user", params: { loginname: item.author.loginname } }}>
               <Image className="head" src={item.author.avatar_url} />
             </Link>
             <View className="info">
@@ -189,47 +186,25 @@ class Topic extends Component<IProps, IState> {
                 </Text>
               </Text>
               <Text className="cr">
-                <Text
-                  className={classNames({
+                <Text className={classNames({
                     iconfont: 1,
                     icon: 1,
                     uped: isUps(item.ups)
-                  })}
-                  onClick={this.upReply.bind(this, item, index)}
-                >
+                  })} onClick={this.upReply.bind(this, item, index)}>
                   &#xe608;
                 </Text>
                 {item.ups.length}
-                <Text
-                  className="iconfont icon"
-                  onClick={this.addReply.bind(this, item.id)}
-                >
+                <Text className="iconfont icon" onClick={this.addReply.bind(this, item.id)}>
                   &#xe609;
                 </Text>
               </Text>
             </View>
           </View>
-          <View
-            className="reply_content"
-            dangerouslySetInnerHTML={{ __html: item.content }}
-          />
-          {userInfo.userId && curReplyId === item.id ? (
-            <Reply
-              topic={topic}
-              updateReplies={fn => {
+          <View className="reply_content" dangerouslySetInnerHTML={{ __html: item.content }} />
+          {userInfo.userId && curReplyId === item.id ? <Reply topic={topic} updateReplies={fn => {
                 fn(topic, this);
-              }}
-              topicId={topicId}
-              replyId={item.id}
-              replyTo={item.author.loginname}
-              show={curReplyId}
-              onClose={this.hideItemReply.bind(this)}
-            />
-          ) : (
-            ""
-          )}
-        </View>
-      );
+              }} topicId={topicId} replyId={item.id} replyTo={item.author.loginname} show={curReplyId} onClose={this.hideItemReply.bind(this)} /> : ""}
+        </View>;
     });
 
     return <Layout className="flex-wrp" title={topic.title}>

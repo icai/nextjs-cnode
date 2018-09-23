@@ -8,6 +8,7 @@ import Router, { withRouter } from "next/router";
 class MyApp extends App {
     render() {
         const { Component, pageProps, reduxStore } = this.props
+        
         return (
             <Container>
                 <Provider store={reduxStore}>
