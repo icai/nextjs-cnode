@@ -1,15 +1,17 @@
 import { ComponentClass } from 'react';
 import React, { Component, Config } from 'react';
 import { View, Text, Image } from 'ui';
-import Header from '../../components/header/index';
-import Link from "../../components/link";
-import Reply from '../../components/reply';
+import Header from 'components/header';
+import Link from "components/link";
+import Reply from 'components/reply';
 import classNames from "classnames";
-import * as utils from '../../libs/utils';
-import { withUser } from "../../hoc/router";
+import * as utils from 'libs/utils';
+import { withUser } from "hoc/router";
 import update from "immutability-helper";
-import { post, get } from "../../utils/request";
-import BackTop from "../../components/backtotop/index";
+import { post, get } from "utils/request";
+import BackTop from "components/backtotop";
+import { withRouter } from "next/router";
+import Layout from 'components/layout';
 
 
 import './index.scss'
@@ -17,6 +19,9 @@ import './index.scss'
 type PageStateProps = {
   userInfo: {
     userId: string;
+  };
+  router: {
+    query: any;
   };
 };
 
@@ -37,13 +42,30 @@ interface Topic {
   props: IProps;
 }
 
+interface IState  {
 
-class Topic extends Component {
-  config: Config = {
-    navigationBarTitleText: "主题"
-  };
+}
 
-  state = {
+
+class Topic extends Component<IProps, IState> {
+
+  static async getInitialProps({ query: { id } }) {
+
+    const topic = await get({
+      url: "https://cnodejs.org/api/v1/topic/" + id
+    })
+    console.info(topic)
+    return {
+      state : {
+        showMenu: false,
+        noData: false,
+        topic: topic.data.data,
+        topicId: id,
+      } 
+    };
+  }
+
+  state =  {
     showMenu: false,
     topic: {
       title: "",
@@ -61,20 +83,23 @@ class Topic extends Component {
       replies: []
     },
     noData: false,
-    topicId: "",
+    topicId: '',
     curReplyId: ""
-  };
+  } 
+  constructor(props) {
+    super(props);
+    this.state = props.state;
+  }
   componentDidMount() {
     this.getTopic();
   }
   addReply(id) {
     this.setState({ curReplyId: id });
     if (!this.props.userInfo.userId) {
-
     }
   }
   hideItemReply() {
-    this.setState({ curReplyId: '' });
+    this.setState({ curReplyId: "" });
   }
   upReply(item, index) {
     const { userInfo } = this.props;
@@ -83,7 +108,7 @@ class Topic extends Component {
       utils.navigateTo({
         url: "/login",
         params: {
-          redirect: encodeURIComponent(this.$router.fullUrl)
+          redirect: encodeURIComponent(this.props.router.fullUrl)
         }
       });
     } else {
@@ -112,10 +137,10 @@ class Topic extends Component {
     }
   }
   getTopic = () => {
-    const topicId = this.$router.params.id;
+    const topicId = this.state.topicId;
     this.setState({ topicId });
     get({
-      url: "https://cnodejs.org/api/v1/topic/" + topicId,
+      url: "https://cnodejs.org/api/v1/topic/" + topicId
       // data: {
       //   mdrender: false
       // }
@@ -129,7 +154,8 @@ class Topic extends Component {
     });
   };
   render() {
-    const { noData, topicId, showMenu, curReplyId, topic } = this.state;
+    console.info(this.props)
+    const { noData, topicId, showMenu, curReplyId, topic } = this.state || this.props.state;
     const { userInfo } = this.props;
     const getLastTimeStr = (Text, ago) => {
       return utils.getLastTimeStr(Text, ago);
@@ -139,12 +165,18 @@ class Topic extends Component {
       return utils.getTabInfo(tab, good, top, isClass);
     };
     const isUps = ups => {
-      return ups.includes((userInfo || {}).userId)
+      return ups.includes((userInfo || {}).userId);
     };
     const replayList = topic.replies.map((item, index) => {
-      return <View className="li flex-wrp">
+      return (
+        <View className="li flex-wrp" key={index}>
           <View className="user">
-            <Link to={{ url: "/user", params: { loginname: item.author.loginname } }}>
+            <Link
+              to={{
+                url: "/user",
+                params: { loginname: item.author.loginname }
+              }}
+            >
               <Image className="head" src={item.author.avatar_url} />
             </Link>
             <View className="info">
@@ -157,26 +189,50 @@ class Topic extends Component {
                 </Text>
               </Text>
               <Text className="cr">
-                <Text className={classNames({
+                <Text
+                  className={classNames({
                     iconfont: 1,
                     icon: 1,
                     uped: isUps(item.ups)
-              })} onClick={this.upReply.bind(this, item, index)}>
+                  })}
+                  onClick={this.upReply.bind(this, item, index)}
+                >
                   &#xe608;
                 </Text>
                 {item.ups.length}
-               <Text className="iconfont icon" onClick={this.addReply.bind(this, item.id)}>
+                <Text
+                  className="iconfont icon"
+                  onClick={this.addReply.bind(this, item.id)}
+                >
                   &#xe609;
                 </Text>
               </Text>
             </View>
           </View>
-          <View className="reply_content" dangerouslySetInnerHTML={{ __html: item.content }} />
-        {userInfo.userId && curReplyId === item.id ? <Reply topic={topic} updateReplies={(fn) => { fn(topic, this) }} topicId={topicId} replyId={item.id} replyTo={item.author.loginname} show={curReplyId} onClose={this.hideItemReply.bind(this)} /> : ""}
-        </View>;
+          <View
+            className="reply_content"
+            dangerouslySetInnerHTML={{ __html: item.content }}
+          />
+          {userInfo.userId && curReplyId === item.id ? (
+            <Reply
+              topic={topic}
+              updateReplies={fn => {
+                fn(topic, this);
+              }}
+              topicId={topicId}
+              replyId={item.id}
+              replyTo={item.author.loginname}
+              show={curReplyId}
+              onClose={this.hideItemReply.bind(this)}
+            />
+          ) : (
+            ""
+          )}
+        </View>
+      );
     });
 
-    return <View className="flex-wrp">
+    return <Layout className="flex-wrp" title={topic.title}>
         <Header pageType={"主题"} fixHead={true} needAdd={true} />
         {topic.title ? <View id="page" className={classNames({
               "show-menu": showMenu
@@ -216,14 +272,16 @@ class Topic extends Component {
               <View className="ul">{replayList}</View>
             </View>
             <BackTop />
-        {userInfo.userId ? <Reply topic={topic} updateReplies={(fn) => { fn(topic, this) }} topicId={topicId} /> : ""}
+            {userInfo.userId ? <Reply topic={topic} updateReplies={fn => {
+                  fn(topic, this);
+                }} topicId={topicId} /> : ""}
           </View> : ""}
         {noData ? <View className="no-data">
             <i className="iconfont icon-empty">&#xe60a;</i>
             该话题不存在!
           </View> : ""}
-      </View>;
+      </Layout>;
   }
 }
 
-export default withUser(Topic as ComponentClass<PageOwnProps, PageState>, true);
+export default withUser(withRouter(Topic) as ComponentClass<PageOwnProps, PageState>, true);

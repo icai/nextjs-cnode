@@ -37,6 +37,15 @@ export const showToast = ({ title }) => {
   alert(title);
 }
 
+export const isServer = typeof window === "undefined";
+
+export const getEnv = () => {
+  if (typeof window === "undefined") {
+    return 'SERVER'
+  } else {
+    return "WEB";
+  }
+}
 
 let getCheck = {
   checkEmail(val) {

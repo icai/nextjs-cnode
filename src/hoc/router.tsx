@@ -26,17 +26,20 @@ function withUser(WrappedComponent, allowNologin = false) {
   class WithUserHOC extends WrappedComponent<IProps, PageState> {
     static async getInitialProps(context) {
       const { reduxStore, req } = context;
-      
       const log = reduxStore.dispatch(actions.authCheckState());
-      
       if (!(allowNologin || log)) {
-        console.info('bbbb-------------------------------------')
         // Already signed in? No need to continue.
         // Throw them back to the main page
         redirect(context, "/login");
+        return false;
       }
-
-      return {}
+      let appProps = {};
+      if (typeof WrappedComponent.getInitialProps === "function") {
+        appProps = await WrappedComponent.getInitialProps.call(WrappedComponent, context);
+      }
+      return {
+        ...appProps
+      }
     }
     constructor() {
       super(...arguments);

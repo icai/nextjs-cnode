@@ -29,7 +29,7 @@ export default class Loading extends Component {
     }
     const colorStyle = {
       'border': `1px solid ${color}`,
-      'border-color': `${color} transparent transparent transparent`
+      'borderColor': `${color} transparent transparent transparent`
     }
     const ringStyle = Object.assign({}, colorStyle, sizeStyle)
 

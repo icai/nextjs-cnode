@@ -2,6 +2,7 @@ import { ComponentClass } from 'react'
 import React, { Component } from 'react'
 import { View } from 'ui'
 import { throttle } from 'throttle-debounce';
+import * as utils from "libs/utils";
 
 import './index.scss'
 
@@ -23,7 +24,7 @@ class BackTop extends Component {
   componentScrollBox;
   constructor() {
     super(...arguments);
-    if (React.getEnv() == 'WEB') {
+    if (utils.getEnv() == 'WEB') {
       this.componentScrollBox = document.documentElement;
     }
   }
@@ -32,13 +33,13 @@ class BackTop extends Component {
   };
 
   componentWillUnmount() {
-    if (React.getEnv() == 'WEB') {
+    if (utils.getEnv() == 'WEB') {
       window.removeEventListener("scroll", this.scrollbinding);
     }
   }
 
   componentDidMount() {
-    if (React.getEnv() == 'WEB') {
+    if (utils.getEnv() == 'WEB') {
       this.scrollbinding = throttle(300, this.handleScroll);
       window.addEventListener("scroll", this.scrollbinding);
     }
@@ -59,12 +60,8 @@ class BackTop extends Component {
   }
 
   goTop = () => {
-    if (React.getEnv() == 'WEB') {
+    if (utils.getEnv() == 'WEB') {
       this.componentScrollBox.scrollTop = 0;
-    } else if (React.getEnv() == 'WEAPP') {
-      React.pageScrollTo({
-        scrollTop: 0
-      })
     }
   };
   render() {

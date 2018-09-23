@@ -25,7 +25,7 @@ app.prepare().then(() => {
   const router = new Router()
 
   router.get('/list', async ctx => {
-    await app.render(ctx.req, ctx.res, '/list', ctx.query)
+    await app.render(ctx.req, ctx.res, '/index', ctx.query)
     ctx.respond = false
   })
 
