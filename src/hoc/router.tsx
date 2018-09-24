@@ -31,7 +31,7 @@ function withUser(WrappedComponent, allowNologin = false) {
         // Already signed in? No need to continue.
         // Throw them back to the main page
         redirect(context, "/login");
-        return false;
+        return {};
       }
       let appProps = {};
       if (typeof WrappedComponent.getInitialProps === "function") {

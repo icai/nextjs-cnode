@@ -46,7 +46,7 @@ class Login extends Component {
         <Header pageType={"登录"} fixHead={true} needAdd={true} />
         <View className="page-body">
           <View className="label">
-            <input className="txt" type="text" placeholder="Access Token" value={token} onChange={this.handleChange.bind(this)} maxlength="36" />
+            <input className="txt" type="text" placeholder="Access Token" value={token} onChange={this.handleChange.bind(this)} maxLength="36" />
           </View>
           <View className="label">
             <View className="button" onClick={this.logon}>

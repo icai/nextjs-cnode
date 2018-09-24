@@ -110,7 +110,7 @@ class Add extends Component<{}, {}> {
     }));
   };
   render() {
-    const { err, selectorIndex } = this.state;
+    const { err, selectorIndex } = this.state || this.props.state;
     return (
       <Layout>
         <Head>
@@ -153,7 +153,7 @@ class Add extends Component<{}, {}> {
             })}
             value={this.state.topic.content}
             onChange={this.handleTopicContentChange}
-            maxlength={9999}
+            maxLength={9999}
             height="400"
             placeholder="回复支持Markdown语法,请注意标记代码"
           />

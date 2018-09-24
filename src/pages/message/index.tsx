@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react'
-import React, { Component, Config } from "react";
+import React, { Component } from "react";
 import { withUser } from "hoc/router";
 import { View, Image, Text, ScrollView } from 'ui';
 import Link from "components/link";
@@ -14,9 +14,6 @@ import './index.scss'
 
 class Message extends Component {
 
-  config: Config = {
-      navigationBarTitleText: '消息'
-  }
 
   state = {
     showMenu: false,
