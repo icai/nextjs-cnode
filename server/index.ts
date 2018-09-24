@@ -29,6 +29,16 @@ app.prepare().then(() => {
     ctx.respond = false
   })
 
+  router.get("/user", async ctx => {
+    await app.render(ctx.req, ctx.res, "/user", ctx.query);
+    ctx.respond = false;
+  });
+
+  router.get("/about", async ctx => {
+    await app.render(ctx.req, ctx.res, "/about", ctx.query);
+    ctx.respond = false;
+  });
+  
   router.get('/login', async ctx => {
     await app.render(ctx.req, ctx.res, '/login', ctx.query)
     ctx.respond = false

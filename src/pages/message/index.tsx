@@ -7,14 +7,14 @@ import Header from 'components/header/index'
 import classNames from "classnames";
 import * as utils from 'libs/utils';
 import { post, get } from "utils/request";
+// import { withRouter } from "next/router";
+import Layout from "components/layout";
 
 
 import './index.scss'
 
 
 class Message extends Component {
-
-
   state = {
     showMenu: false,
     selectItem: 2,
@@ -78,7 +78,7 @@ class Message extends Component {
       return utils.getLastTimeStr(date, friendly);
     }
     return (
-      <View className="flex-wrp"  >
+      <Layout className="flex-wrp"  >
         <Header pageType={"消息"} fixHead={true} showMenu={true}
         needAdd={true} messageCount={no_read_len}></Header>
         <View id="page" className="page">
@@ -134,10 +134,8 @@ class Message extends Component {
                 </View> : ''
               }
             </View>
-
         </View>
-
-    </View>
+      </Layout>
     )
   }
 }

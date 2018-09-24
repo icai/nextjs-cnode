@@ -5,43 +5,52 @@ import Router, { withRouter } from "next/router";
 import * as utils from 'libs/utils';
 
 type IProps = {
-  props: {
-    to: {
-      url: string,
-      params: object
-    }
-    className: string,
-    children: any
-  }
-}
+  to: {
+    url: string;
+    params?: object;
+  };
+  style?: object,
+  className?: string;
+  children?: React.ReactNode
+};
 type PageState = {
 
 }
+
+
+
+// interface Link<ReactElement = any>  { }
 
 class Link extends Component<IProps, PageState> {
   static defaultProps = {
     to: {
       url: "",
-      params: ""
-    }
+      params: {}
+    },
+    style: {},
+    className: '',
+    children: ''
   };
 
   goTo = ({ url, params }) => {
-    const href = url + (params ? "?" + utils.param(params) : "")
+    const href = url + (params ? "?" + utils.param(params) : "");
     Router.push(href);
     // window.location.href = href;
     // return false;
   };
   render() {
-    const props = this.props;
-    const cprops = {
-      ...props, style: {
-        cursor: 'pointer'
-      }};
-    delete cprops.to;
-    return <View className={cprops.className} style={cprops.style} onClick={this.goTo.bind(this, props.to)}>
-        {this.props.children}
-      </View>;
+    const { className, style, to, children, ...rest } = this.props;
+    const withpointer = { ...style, cursor: "pointer" };
+    return (
+      <View
+        className={className}
+        style={withpointer}
+        onClick={this.goTo.bind(this, to)}
+        {...rest}
+      >
+        {children}
+      </View>
+    );
   }
 }
 

@@ -22,8 +22,8 @@ interface BackTop {
 
 class BackTop extends Component {
   componentScrollBox;
-  constructor() {
-    super(...arguments);
+  constructor(props) {
+    super(props);
     if (utils.getEnv() == 'WEB') {
       this.componentScrollBox = document.documentElement;
     }

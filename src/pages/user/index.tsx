@@ -1,5 +1,4 @@
-import { ComponentClass } from 'react';
-import React, { Config } from "react";
+import React, { ComponentClass, Config } from "react";
 import { Component } from "hoc/router";
 import { View, Image, Text } from 'ui';
 import { connect } from 'react-redux';
@@ -10,6 +9,8 @@ import * as actions from "actions/auth";
 import * as utils from 'libs/utils';
 import { get } from "utils/request";
 import { IAuth } from "interfaces/auth";
+import { withRouter } from "next/router";
+import Layout from "components/layout";
 
 import './index.scss'
 
@@ -32,20 +33,8 @@ type PageState = {};
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
-@connect(
-  ({ auth }) => ({
-    userInfo: auth
-  }),
-  (dispatch: Function) => ({
-    authCheckState() {
-      dispatch(actions.authCheckState());
-    }
-  })
-)
+
 class User extends Component<IProps, PageState> {
-  config: Config = {
-    navigationBarTitleText: "用户信息"
-  };
   state = {
     currentData: [],
     user: {
@@ -73,7 +62,7 @@ class User extends Component<IProps, PageState> {
     }));
   };
   getUser() {
-    let loginname = this.$router.params.loginname;
+    let loginname = this.props.router.query.loginname;
     if (!loginname) {
       utils.showToast({
         title: "缺少用户名参数"
@@ -111,14 +100,8 @@ class User extends Component<IProps, PageState> {
     const getLastTimeStr = (date, friendly) => {
       return utils.getLastTimeStr(date, friendly);
     };
-    return (
-      <View className="flex-wrp">
-        <Header
-          pageType={"用户信息"}
-          fixHead={true}
-          showMenu={true}
-          needAdd={true}
-        />
+    return <Layout className="flex-wrp">
+        <Header pageType={"用户信息"} fixHead={true} showMenu={true} needAdd={true} />
         <View className="userinfo">
           <Image className="u-img" src={user.avatar_url} />
           <br />
@@ -135,40 +118,27 @@ class User extends Component<IProps, PageState> {
         </View>
         <View className="topics">
           <View className="user-tabs">
-            <View
-              className={classNames({
+            <View className={classNames({
                 item: 1,
                 br: 1,
                 selected: selectItem === 1
-              })}
-              onClick={this.changeItem.bind(this, 1)}
-            >
+              })} onClick={this.changeItem.bind(this, 1)}>
               最近回复
             </View>
-            <View
-              className={classNames({ item: 1, selected: selectItem === 2 })}
-              onClick={this.changeItem.bind(this, 2)}
-            >
+            <View className={classNames({
+                item: 1,
+                selected: selectItem === 2
+              })} onClick={this.changeItem.bind(this, 2)}>
               最新发布
             </View>
           </View>
           {currentData.map(item => {
-            return (
-              <View className="message">
+            return <View className="message">
                 <View className="user">
-                  <Link
-                    className="head"
-                    to={{
-                      url: "/user",
-                      params: { loginname: item.author.loginname }
-                    }}
-                  >
+                  <Link className="head" to={{ url: "/user", params: { loginname: item.author.loginname } }}>
                     <Image class="head" src={item.author.avatar_url} />
                   </Link>
-                  <Link
-                    className="info"
-                    to={{ url: "/topic", params: { id: item.id } }}
-                  >
+                  <Link className="info" to={{ url: "/topic", params: { id: item.id } }}>
                     <View className="t-title">{item.title}</View>
                     <Text className="cl mt12">
                       <Text className="name">{item.author.loginname}</Text>
@@ -180,23 +150,25 @@ class User extends Component<IProps, PageState> {
                     </Text>
                   </Link>
                 </View>
-              </View>
-            );
+              </View>;
           })}
-          {currentData.length === 0 ? (
-            <View className="no-data">
+          {currentData.length === 0 ? <View className="no-data">
               <Text className="iconfont icon-empty">&#xe60a;</Text>
               暂无数据!
-            </View>
-          ) : (
-            ""
-          )}
+            </View> : ""}
         </View>
-      </View>
-    );
+      </Layout>;
   }
 }
 
 
-
-export default User as ComponentClass<PageOwnProps, PageState>
+export default connect(
+  ({ auth }) => ({
+    userInfo: auth
+  }),
+  (dispatch: Function) => ({
+    authCheckState() {
+      dispatch(actions.authCheckState());
+    }
+  })
+)(withRouter(User));

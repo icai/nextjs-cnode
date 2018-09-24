@@ -1,6 +1,5 @@
-import React from "react";
 import * as actionTypes from "../constants/auth";
-import { post, get } from "../utils/request";
+import { post } from "../utils/request";
 import store from "../utils/store";
 
 export const authStart = () => {
@@ -9,11 +8,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (user) => {
+export const authSuccess = user => {
   return { type: actionTypes.AUTH_SUCCESS, ...user };
 };
 
-export const authFail = (error) => {
+export const authFail = error => {
   return {
     type: actionTypes.AUTH_FAIL,
     error: error
@@ -29,7 +28,7 @@ export const logout = () => {
   };
 };
 
-export const checkAuthTimeout = (expirationTime) => {
+export const checkAuthTimeout = expirationTime => {
   return dispatch => {
     setTimeout(() => {
       dispatch(logout());
@@ -37,7 +36,7 @@ export const checkAuthTimeout = (expirationTime) => {
   };
 };
 
-export const auth = (accesstoken) => {
+export const auth = accesstoken => {
   return dispatch => {
     dispatch(authStart());
     const userInfo = { accesstoken: accesstoken };
@@ -68,7 +67,7 @@ export const auth = (accesstoken) => {
   };
 };
 
-export const setAuthRedirectPath = (path) => {
+export const setAuthRedirectPath = path => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT_PATH,
     path: path
@@ -77,12 +76,12 @@ export const setAuthRedirectPath = (path) => {
 
 export const authCheckState = () => {
   return dispatch => {
-    const token = store.getItem('user');
+    const token = store.getItem("user");
     if (!token) {
       // dispatch(logout());
     } else {
-        //  const expirationDate = new Date(store.getItem("expirationDate"));
-        // && expirationDate <= new Date()
+      //  const expirationDate = new Date(store.getItem("expirationDate"));
+      // && expirationDate <= new Date()
       if (false) {
         dispatch(logout());
       } else {
