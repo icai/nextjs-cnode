@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server/index.ts",
-    "build": "next build && tsc --project tsconfig.server.json",
+    "build": "next build ./src && tsc --project tsconfig.server.json",
     "start": "NODE_ENV=production node .next/production-server/index.js"
   },
   "repository": {

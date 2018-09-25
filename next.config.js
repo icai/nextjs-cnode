@@ -7,7 +7,7 @@ const withSass = require('@zeit/next-sass')
 const withCSS = require('@zeit/next-css')
 // const withPx2Rem = require('./tools/with-px2rem/index.js');
 const NODE_ENV = process.env.NODE_ENV
-module.exports = withCSS(
+const conf = withCSS(
   withSass(withTypescript({
     webpack(config, options) {
       config.plugins = config.plugins || []
@@ -77,3 +77,6 @@ module.exports = withCSS(
       return config
     }
   })))
+module.exports = {
+  ...conf
+}
