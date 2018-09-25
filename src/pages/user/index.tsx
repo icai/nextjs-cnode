@@ -1,4 +1,4 @@
-import React, { ComponentClass, Config } from "react";
+import React from "react";
 import { Component } from "hoc/router";
 import { View, Image, Text } from 'ui';
 import { connect } from 'react-redux';
@@ -35,6 +35,9 @@ interface PageState  {
     avatar_url: string;
     recent_replies?: any[];
     recent_topics?: any[];
+    loginname: string;
+    create_at: string;
+    score: number;
   }
   showMenu: boolean,
   selectItem: boolean | number
@@ -50,7 +53,10 @@ class User extends Component<IProps, PageState> {
     user: {
       avatar_url: "",
       recent_replies: [],
-      recent_topics: []
+      recent_topics: [],
+      loginname: '',
+      create_at: '',
+      score: 0
     },
     showMenu: false,
     selectItem: 1
@@ -167,7 +173,7 @@ class User extends Component<IProps, PageState> {
                       params: { loginname: item.author.loginname }
                     }}
                   >
-                    <Image class="head" src={item.author.avatar_url} />
+                    <Image className="head" src={item.author.avatar_url} />
                   </Link>
                   <Link
                     className="info"

@@ -9,8 +9,24 @@ import Layout from 'components/layout';
 import './index.scss'
 
 
-class Login extends Component {
+type PageStateProps = {
 
+};
+
+type PageDispatchProps = {
+  authLogin: (token) => Promise<any>;
+};
+
+type PageOwnProps = {};
+
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
+
+interface PageState {
+  token: any;
+  err: any;
+} 
+
+class Login extends Component<IProps, PageState> {
   state = {
     token: "",
     err: {
@@ -39,11 +55,19 @@ class Login extends Component {
   }
   render() {
     const { token } = this.state;
-    return <Layout className="login-page" title="登录">
+    return (
+      <Layout className="login-page" title="登录">
         <Header pageType={"登录"} fixHead={true} needAdd={true} />
         <View className="page-body">
           <View className="label">
-            <input className="txt" type="text" placeholder="Access Token" value={token} onChange={this.handleChange.bind(this)} maxLength="36" />
+            <input
+              className="txt"
+              type="text"
+              placeholder="Access Token"
+              value={token}
+              onChange={this.handleChange.bind(this)}
+              maxLength={36}
+            />
           </View>
           <View className="label">
             <View className="button" onClick={this.logon}>
@@ -51,7 +75,8 @@ class Login extends Component {
             </View>
           </View>
         </View>
-      </Layout>;
+      </Layout>
+    );
   }
 }
 

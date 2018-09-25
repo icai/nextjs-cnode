@@ -1,4 +1,4 @@
-import React, { Component, eventCenter } from 'react'
+import React, { Component } from 'react'
 import { View, Text, Image } from 'ui'
 import Link from "components/link";
 

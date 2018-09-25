@@ -191,10 +191,11 @@ export const inArray = (str, arr) => {
 };
 
 export const getContentHtml = v => {
-  let dom = document.createElement("div");
-  dom.className = "markdown-text";
-  dom.innerHTML = v;
-  return dom.outerHTML;
+  return v
+  // let dom = document.createElement("div");
+  // dom.className = "markdown-text";
+  // dom.innerHTML = v;
+  // return dom.outerHTML;
 };
 
 /**

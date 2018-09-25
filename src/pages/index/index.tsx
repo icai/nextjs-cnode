@@ -6,12 +6,12 @@ import { TopicsList } from "components/topics";
 import Header from "components/header";
 import { throttle } from "throttle-debounce";
 import { ITopic } from "interfaces/topic";
-import BackTop from "components/backtotop";
+// import BackTop from "components/backtotop";
 // import update from "immutability-helper";
 import { get } from "utils/request";
 import Loading from "components/loading2";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { withRouter } from "next/router";
 import Head from "next/head";
 import Layout from "components/layout";
@@ -20,7 +20,7 @@ import "./index.scss";
 
 // type IProps =  {};
 interface IProps {
-  props: object;
+  state: IState;
   router: {
     query: any;
   };
@@ -46,6 +46,7 @@ class List extends Component<IProps, IState> {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = props.state;
   }
   static getInitialProps({ query: { tab } }) {
@@ -168,7 +169,7 @@ class List extends Component<IProps, IState> {
   };
 
   render() {
-    const { searchKey, topics, loading } = this.state;
+    const { searchKey, topics, loading } = this.state || this.props.state;
     return (
       <Layout>
         <Head>

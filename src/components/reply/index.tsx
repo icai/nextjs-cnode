@@ -5,21 +5,27 @@ import * as utils from "libs/utils";
 import { withUser } from "hoc/router";
 import classNames from "classnames";
 import update from "immutability-helper";
-import { post, get } from "utils/request";
+import { post } from "utils/request";
 import './index.scss'
 
 const markdown = require("markdown").markdown;
 
+interface updateRepliesFunc {
+  (func: any): any;
+}
+
 type Iprops = {
-  props: {
-    topicId;
-    replyId;
-    replyTo;
-    show;
-    updateReplies: () => void;
-    onClose: () => void;
-  };
+  userInfo;
+  topic;
+  topicId;
+  replyId;
+  replyTo?;
+  show;
+  updateReplies: updateRepliesFunc;
+  onClose: () => void;
 };
+
+
 
 type PageState = {
   hasErr;
@@ -36,9 +42,7 @@ class Reply extends Component<Iprops, PageState> {
       "\n\n 来自拉风的 [React-cnode](https://github.com/icai/taro-cnode)"
   };
 
-  componentWillReceiveProps(nextProps) {
-    // console.log(this.props, nextProps);
-  }
+
 
   handleChange = e => {
     this.setState({
@@ -56,7 +60,6 @@ class Reply extends Component<Iprops, PageState> {
     const { content, author_txt } = this.state;
     const {
       userInfo,
-      topic,
       topicId,
       replyId,
       show,
@@ -69,7 +72,7 @@ class Reply extends Component<Iprops, PageState> {
       let linkUsers = utils.linkUsers(content);
       let htmlText = markdown.toHTML(linkUsers) + author_txt;
       let replyContent = utils.getContentHtml(htmlText);
-      let postData = {
+      let postData: any = {
         accesstoken: userInfo.token,
         content: content + author_txt
       };
@@ -122,7 +125,7 @@ class Reply extends Component<Iprops, PageState> {
         <textarea id="content" className={classNames({
             text: 1,
             err: hasErr
-          })} value={this.state.content} onChange={this.handleChange} type="text" placeholder="回复支持Markdown语法,请注意标记代码" rows="8" class="text" >
+          })} value={this.state.content} onChange={this.handleChange}  placeholder="回复支持Markdown语法,请注意标记代码" rows={8} >
         </textarea>
         <View className="button" onClick={this.addReply.bind(this)}>
           确定
