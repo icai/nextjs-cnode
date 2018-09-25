@@ -7,17 +7,39 @@ import classNames from "classnames";
 import { post } from "utils/request";
 import Head from "next/head";
 import Layout from "components/layout";
+import { IAuth } from "interfaces/auth";
 
 
 import './index.scss'
 
 
-class Add extends Component<{}, {}> {
+type PageStateProps = {
+  userInfo: IAuth;
+  state: PageState;
+};
+
+type PageDispatchProps = {
+  authCheckState: () => void;
+};
+
+type PageOwnProps = {};
+interface PageState {
+  topic?: any;
+  err: string;
+  authorTxt: string;
+  selectorIndex: number;
+  selector: any[];
+} 
+
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
+
+
+class Add extends Component<IProps, PageState> {
   constructor(props) {
     super(props);
     this.state = props.state;
   }
-  static getInitialProps({ query: { tab } }) {
+  static getInitialProps() {
     return {
       state: {
         topic: {
@@ -110,7 +132,7 @@ class Add extends Component<{}, {}> {
     }));
   };
   render() {
-    const { err, selectorIndex } = this.state || this.props.state;
+    const { err } = this.state || this.props.state;
     return (
       <Layout>
         <Head>
@@ -154,7 +176,7 @@ class Add extends Component<{}, {}> {
             value={this.state.topic.content}
             onChange={this.handleTopicContentChange}
             maxLength={9999}
-            height="400"
+            style={{ height: '400px'}}
             placeholder="回复支持Markdown语法,请注意标记代码"
           />
         </View>

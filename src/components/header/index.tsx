@@ -14,8 +14,8 @@ type IProps = {
   fixHead: boolean,
   messageCount?: number,
   scrollTop?: number,
-  needAdd: boolean
-  showMenu?: boolean | undefined
+  needAdd?: boolean
+  showMenu?: boolean
 };
 
 interface IState {
@@ -29,6 +29,7 @@ class Header extends Component<IProps, IState> {
   static defaultProps = {
     messageCount: 0,
     scrollTop: 0,
+    needAdd: false,
     showMenu: true
   };
 

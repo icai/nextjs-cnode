@@ -10,9 +10,6 @@ import './index.scss'
 
 
 class Login extends Component {
-  config: Config = {
-    navigationBarTitleText: "登录"
-  };
 
   state = {
     token: "",

@@ -1,9 +1,9 @@
 "use strict";
 
 // import _ from 'lodash';
-import Timeago from "timeago.js";
-import React from "react";
-import { ITopic } from "../interfaces/topic";
+import Timeago, { TimeAgoInterface } from "timeago.js";
+// import React from "react";
+// import { ITopic } from "../interfaces/topic";
 import Router from "next/router";
 
 export const updateObject = (oldObject, updatedProperties) => {
@@ -179,7 +179,8 @@ const fmtDate = (date, fmt) => {
 export const MillisecondToDate = time => {
   var str = "";
   if (time !== null && time !== "") {
-    let timeagoInstance = new Timeago();
+    let timeagoInstance: TimeAgoInterface;
+    timeagoInstance = Timeago();
     str = timeagoInstance.format(time, "zh_CN");
   }
   return str;
@@ -258,11 +259,11 @@ export const getTabInfo = (tab, good, top, isClass) => {
  */
 export const throttle = (fn, wait, mustRun) => {
   let timeout;
-  let startTime = new Date();
+  let startTime = +new Date();
   return function() {
     let context = this;
     let args = arguments;
-    let curTime = new Date();
+    let curTime = +new Date();
 
     clearTimeout(timeout);
     // 如果达到了规定的触发时间间隔，触发 handler
