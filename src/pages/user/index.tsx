@@ -9,7 +9,7 @@ import * as actions from "actions/auth";
 import * as utils from 'libs/utils';
 import { get } from "utils/request";
 import { IAuth } from "interfaces/auth";
-import { withRouter } from "next/router";
+import { withRouter, RouterProps } from "next/router";
 import Layout from "components/layout";
 
 import './index.scss'
@@ -17,6 +17,7 @@ import './index.scss'
 
 type PageStateProps = {
   userInfo: IAuth;
+  router: RouterProps;
 };
 
 
@@ -29,7 +30,16 @@ type PageOwnProps = {
 
 };
 
-type PageState = {};
+interface PageState  {
+  user: {
+    avatar_url: string;
+    recent_replies?: any[];
+    recent_topics?: any[];
+  }
+  showMenu: boolean,
+  selectItem: boolean | number
+  currentData: any[]
+};
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
@@ -38,7 +48,9 @@ class User extends Component<IProps, PageState> {
   state = {
     currentData: [],
     user: {
-      avatar_url: ""
+      avatar_url: "",
+      recent_replies: [],
+      recent_topics: []
     },
     showMenu: false,
     selectItem: 1
@@ -100,8 +112,14 @@ class User extends Component<IProps, PageState> {
     const getLastTimeStr = (date, friendly) => {
       return utils.getLastTimeStr(date, friendly);
     };
-    return <Layout className="flex-wrp">
-        <Header pageType={"用户信息"} fixHead={true} showMenu={true} needAdd={true} />
+    return (
+      <Layout className="flex-wrp">
+        <Header
+          pageType={"用户信息"}
+          fixHead={true}
+          showMenu={true}
+          needAdd={true}
+        />
         <View className="userinfo">
           <Image className="u-img" src={user.avatar_url} />
           <br />
@@ -118,27 +136,43 @@ class User extends Component<IProps, PageState> {
         </View>
         <View className="topics">
           <View className="user-tabs">
-            <View className={classNames({
+            <View
+              className={classNames({
                 item: 1,
                 br: 1,
                 selected: selectItem === 1
-              })} onClick={this.changeItem.bind(this, 1)}>
+              })}
+              onClick={this.changeItem.bind(this, 1)}
+            >
               最近回复
             </View>
-            <View className={classNames({
+            <View
+              className={classNames({
                 item: 1,
                 selected: selectItem === 2
-              })} onClick={this.changeItem.bind(this, 2)}>
+              })}
+              onClick={this.changeItem.bind(this, 2)}
+            >
               最新发布
             </View>
           </View>
           {currentData.map(item => {
-            return <View className="message">
+            return (
+              <View className="message">
                 <View className="user">
-                  <Link className="head" to={{ url: "/user", params: { loginname: item.author.loginname } }}>
+                  <Link
+                    className="head"
+                    to={{
+                      url: "/user",
+                      params: { loginname: item.author.loginname }
+                    }}
+                  >
                     <Image class="head" src={item.author.avatar_url} />
                   </Link>
-                  <Link className="info" to={{ url: "/topic", params: { id: item.id } }}>
+                  <Link
+                    className="info"
+                    to={{ url: "/topic", params: { id: item.id } }}
+                  >
                     <View className="t-title">{item.title}</View>
                     <Text className="cl mt12">
                       <Text className="name">{item.author.loginname}</Text>
@@ -150,14 +184,20 @@ class User extends Component<IProps, PageState> {
                     </Text>
                   </Link>
                 </View>
-              </View>;
+              </View>
+            );
           })}
-          {currentData.length === 0 ? <View className="no-data">
+          {currentData.length === 0 ? (
+            <View className="no-data">
               <Text className="iconfont icon-empty">&#xe60a;</Text>
               暂无数据!
-            </View> : ""}
+            </View>
+          ) : (
+            ""
+          )}
         </View>
-      </Layout>;
+      </Layout>
+    );
   }
 }
 
@@ -171,4 +211,4 @@ export default connect(
       dispatch(actions.authCheckState());
     }
   })
-)(withRouter(User));
+)(withRouter(User as React.ComponentType<any>));

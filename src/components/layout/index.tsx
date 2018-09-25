@@ -4,7 +4,7 @@ import Head from "next/head";
 import "assets/scss/app.scss";
 
 export default class Layout extends Component<{
-    className: string
+    className?: string
     title?: string
 }>  {
     render() {

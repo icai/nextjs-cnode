@@ -4,7 +4,7 @@ import Router, { withRouter } from "next/router";
 
 import * as utils from 'libs/utils';
 
-type IProps = {
+interface IProps  {
   to: {
     url: string;
     params?: object;
@@ -13,13 +13,10 @@ type IProps = {
   className?: string;
   children?: React.ReactNode
 };
-type PageState = {
+interface PageState  {
 
 }
 
-
-
-// interface Link<ReactElement = any>  { }
 
 class Link extends Component<IProps, PageState> {
   static defaultProps = {
@@ -54,4 +51,4 @@ class Link extends Component<IProps, PageState> {
   }
 }
 
-export default withRouter(Link);
+export default withRouter(Link as React.ComponentType<any>);

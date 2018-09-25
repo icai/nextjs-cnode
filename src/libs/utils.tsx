@@ -13,47 +13,53 @@ export const updateObject = (oldObject, updatedProperties) => {
   };
 };
 
+export const typeOf = obj => {
+  return Object.prototype.toString
+    .call(obj)
+    .slice(8, -1)
+    .toLowerCase();
+};
 
-export const typeOf = (obj)=> {
-  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
-}
-
-
-export const isObject = (obj)=> {
+export const isObject = obj => {
   return typeOf(obj) === "object";
-}
+};
 
-export const isEmptyObject = (obj) => {
+export const isEmptyObject = obj => {
   let name;
   for (name in obj) {
     return false;
   }
   return true;
-}
+};
 
-export const navigateTo = ({ url, params }) => {
-  const href = url + (params ? "?" + param(params) : "")
+type UrlParams = {
+  url: string;
+  params?: object;
+};
+
+export const navigateTo = ({ url, params }: UrlParams) => {
+  const href = url + (params ? "?" + param(params) : "");
   Router.push(href);
 };
 
-export const redirectTo = ({ url, params }) => {
+export const redirectTo = ({ url, params }: UrlParams) => {
   const href = url + (params ? "?" + param(params) : "");
   Router.replace(href);
 };
 
 export const showToast = ({ title }) => {
   alert(title);
-}
+};
 
 export const isServer = typeof window === "undefined";
 
 export const getEnv = () => {
   if (typeof window === "undefined") {
-    return 'SERVER'
+    return "SERVER";
   } else {
     return "WEB";
   }
-}
+};
 
 let getCheck = {
   checkEmail(val) {
@@ -179,14 +185,12 @@ export const MillisecondToDate = time => {
   return str;
 };
 
-
 export const inArray = (str, arr) => {
   return arr.indexOf(str);
-}
+};
 
-
-export const getContentHtml = (v) => {
-  let dom = document.createElement('div');
+export const getContentHtml = v => {
+  let dom = document.createElement("div");
   dom.className = "markdown-text";
   dom.innerHTML = v;
   return dom.outerHTML;
@@ -274,7 +278,6 @@ export const throttle = (fn, wait, mustRun) => {
 
 export { linkUsers, fetchUsers, getCheck, fmtDate };
 
-
 // tslint:disable-next-line
 // export const Thread_DETAIL_NAVIGATE = 'thread_detail_navigate'
 
@@ -315,11 +318,10 @@ const betterChineseDict = (_, index) => {
 
 Timeago.register("zh", betterChineseDict);
 
-
-export const trim = (v)=> {
+export const trim = v => {
   var re = /^\s+|\s+$/g;
   return v.replace(re, "");
-}
+};
 
 export const param = function(a) {
   var s = [];
