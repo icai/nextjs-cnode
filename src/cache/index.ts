@@ -6,6 +6,7 @@ const options = {
     length: function(n, key) {
       return n * 2 + key.length;
     },
+    // @ts-ignore
     dispose: function(key, n) {
       n.close();
     },
