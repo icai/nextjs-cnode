@@ -12,6 +12,8 @@ type APageProps = {
 
 type AppProps = AppComponentProps & APageProps;
 
+
+// @ts-ignore
 class MyApp extends App<AppProps, AppComponentContext> {
   render() {
     const { Component, pageProps, reduxStore } = this.props;
