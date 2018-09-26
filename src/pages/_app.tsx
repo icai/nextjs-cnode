@@ -8,6 +8,7 @@ import { AppComponentProps, AppComponentContext } from "next/app";
 
 type APageProps = {
   reduxStore: Store;
+  props: any;
 };
 
 type AppProps = AppComponentProps & APageProps;
@@ -16,8 +17,8 @@ type AppProps = AppComponentProps & APageProps;
 // @ts-ignore
 class MyApp extends App<AppProps, AppComponentContext> {
   render() {
+    // @ts-ignore
     const { Component, pageProps, reduxStore } = this.props;
-
     return (
       <Container>
         <Provider store={reduxStore}>
