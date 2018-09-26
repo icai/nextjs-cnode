@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server/index.ts",
     "build": "next build ./src && tsc --project tsconfig.server.json",
-    "start": "NODE_ENV=production node .next/production-server/index.js"
+    "start": "set NODE_ENV=production&&node  ./.next/production-server/index.js"
   },
   "repository": {
     "type": "git",
