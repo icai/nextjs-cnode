@@ -14,6 +14,27 @@ npm run dev
 
 
 
+## Build
+
+
+```bash
+npm run build
+
+```
+
+
+## Deploy
+
+```
+pm2 start
+
+```
+
+
+- https://github.com/zeit/next.js/wiki/Deployment-on-Nginx's-reverse-proxy
+
+
+
 ## Screenshots
 
 ![](https://raw.githubusercontent.com/icai/nextjs-cnode/master/screenshots/images/topic_01.png)
@@ -33,6 +54,7 @@ npm run dev
 - https://nextjs.org/docs/
 - https://github.com/zeit/next.js/tree/master/examples
 - https://github.com/estrada9166/server-authentication-next.js
+- https://github.com/zeit/next.js/wiki/
 
 
 
