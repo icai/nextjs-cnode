@@ -1,4 +1,3 @@
-import { ComponentClass } from 'react'
 import React, { Component } from 'react'
 import { View } from 'ui'
 import Header from 'components/header/index'

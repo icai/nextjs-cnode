@@ -1,7 +1,5 @@
-import React from 'react'
-import App from "next/app";
+import { Component } from "react";
 import { initializeStore } from './'
-
 const isServer = typeof window === 'undefined'
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
 
@@ -19,9 +17,9 @@ function getOrCreateStore(initialState = {}) {
 }
 
 
-export default (App: App | any) => {
-  return class AppWithRedux extends React.Component {
-    reduxStore;
+
+export default (RApp): React.ReactNode  => {
+  return class AppWithRedux extends Component {
     static async getInitialProps(appContext) {
       // Get or Create the store with `undefined` as initialState
       // This allows you to set a custom default initialState
@@ -31,19 +29,20 @@ export default (App: App | any) => {
       appContext.ctx.reduxStore = reduxStore;
 
       let appProps = {};
-      if (typeof App.getInitialProps === "function") {
-        appProps = await App.getInitialProps.call(App, appContext);
+      if (typeof RApp.getInitialProps === "function") {
+        appProps = await RApp.getInitialProps.call(RApp, appContext);
       }
 
       return { ...appProps, initialReduxState: reduxStore.getState() };
     }
-
     constructor(props) {
       super(props);
+      // @ts-ignore
       this.reduxStore = getOrCreateStore(props.initialReduxState);
     }
     render() {
-      return <App reduxStore={ this.reduxStore } {...this.props }  />;
+      // @ts-ignore
+      return <RApp reduxStore={this.reduxStore} {...this.props} />;
     }
   };
 };

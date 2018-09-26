@@ -1,4 +1,4 @@
-import { ComponentClass } from 'react'
+// import { ComponentClass } from 'react'
 import React, { Component } from 'react'
 import { View, Image, Text } from "ui";
 import Link from "components/link";
@@ -9,13 +9,10 @@ import { IAuth } from "interfaces/auth";
 
 import './index.scss'
 
-// type PageStateProps = {
-//   userInfo: IAuth;
-// };
-
-interface PageStateProps {
+type PageStateProps = {
   userInfo: IAuth;
-}
+};
+
 
 type PageDispatchProps = {
   authCheckState: () => void;
@@ -30,9 +27,6 @@ type PageState = {};
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 class UserInfo extends Component<IProps, PageState> {
-  componentWillReceiveProps(nextProps) {
-    // console.log(this.props, nextProps);
-  }
   componentWillMount() {
     this.props.authCheckState();
   }

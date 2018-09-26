@@ -1,5 +1,4 @@
-import { ComponentClass } from "react";
-import React, { Component } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/auth";
 import { IAuth } from "../interfaces/auth";
@@ -25,7 +24,7 @@ type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 function withUser(WrappedComponent, allowNologin = false) {
   class WithUserHOC extends WrappedComponent<IProps, PageState> {
     static async getInitialProps(context) {
-      const { reduxStore, req } = context;
+      const { reduxStore } = context;
       const log = reduxStore.dispatch(actions.authCheckState());
       if (!(allowNologin || log)) {
         // Already signed in? No need to continue.

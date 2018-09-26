@@ -13,7 +13,7 @@ const initialState = {
   authRedirectPath: '/'
 
 };
-
+// @ts-ignore
 const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
 };
@@ -35,13 +35,14 @@ const authFail = (state, action) => {
     loading: false
   });
 };
-
+// @ts-ignore
 const authLogout = (state, action) => {
   return updateObject(state, {
     loginname: null,
     avatar_url: null,
     userId: null,
-    token: null });
+    token: null
+  });
 };
 
 const setAuthRedirectPath = (state, action) => {

@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react';
-import React, { Component, Config } from 'react';
+import React, { Component } from 'react';
 import { View, Text, Image } from 'ui';
 import Header from 'components/header';
 import Link from "components/link";
@@ -10,19 +10,17 @@ import { withUser } from "hoc/router";
 import update from "immutability-helper";
 import { post, get } from "utils/request";
 import BackTop from "components/backtotop";
-import { withRouter } from "next/router";
+import { withRouter, RouterProps } from "next/router";
 import Layout from 'components/layout';
+import { IAuth } from "interfaces/auth";
 
 
 import './index.scss'
 
 type PageStateProps = {
-  userInfo: {
-    userId: string;
-  };
-  router: {
-    query: any;
-  };
+  userInfo: IAuth;
+  router: RouterProps;
+  state: IState;
 };
 
 type PageDispatchProps = {
@@ -31,19 +29,16 @@ type PageDispatchProps = {
 }
 
 type PageOwnProps = {
-  userInfo: object
 };
 
 type PageState = {}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
-interface Topic {
-  props: IProps;
-}
 
-interface IState  {
 
+type IState = {
+  noData, topicId, showMenu, curReplyId, topic
 }
 
 
@@ -102,6 +97,8 @@ class Topic extends Component<IProps, IState> {
     if (!this.props.userInfo.userId) {
     }
   }
+
+
   hideItemReply() {
     this.setState({ curReplyId: "" });
   }
@@ -112,7 +109,7 @@ class Topic extends Component<IProps, IState> {
       utils.navigateTo({
         url: "/login",
         params: {
-          redirect: encodeURIComponent(this.props.router.fullUrl)
+          redirect: encodeURIComponent(this.props.router.asPath)
         }
       });
     } else {
@@ -168,7 +165,7 @@ class Topic extends Component<IProps, IState> {
       return utils.getTabInfo(tab, good, top, isClass);
     };
     const isUps = ups => {
-      return ups.includes((userInfo || {}).userId);
+      return ups.includes((userInfo || {} as IAuth).userId);
     };
     const replayList = topic.replies && topic.replies.map((item, index) => {
       return <View className="li flex-wrp" key={index}>

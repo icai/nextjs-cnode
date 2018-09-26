@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withUser } from "hoc/router";
-import { View, Image, Text, ScrollView } from 'ui';
+import { View, Image, Text } from 'ui';
 import Link from "components/link";
 import Header from 'components/header/index'
 import classNames from "classnames";
@@ -133,7 +133,7 @@ class Message extends Component<IProps, PageState> {
           <View className="tab-content">
             {currentData.map((item, idx) => {
               return (
-                <View className="message markdown-body">
+                <View className="message markdown-body" key={idx}>
                   <View className="user">
                     <Image className="head" src={item.author.avatar_url} />
                     <View className="info">
