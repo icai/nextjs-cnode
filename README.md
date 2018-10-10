@@ -34,6 +34,14 @@ pm2 start
 - https://github.com/zeit/next.js/wiki/Deployment-on-Nginx's-reverse-proxy
 
 
+## Process
+
+- [x] 所有页面渲染逻辑
+- [ ] token登录 及 cookie 存储
+- [ ] 回复发布
+- [ ] 缓存机制
+
+
 
 ## Screenshots
 
