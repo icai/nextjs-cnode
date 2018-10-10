@@ -37,9 +37,9 @@ pm2 start
 ## Process
 
 - [x] 所有页面渲染逻辑
-- [ ] token登录 及 cookie 存储
+- [ ] token登录及cookie存储
 - [ ] 回复发布
-- [ ] 缓存机制
+- [ ] 缓存机制
 
 
 
