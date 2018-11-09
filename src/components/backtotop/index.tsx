@@ -52,13 +52,6 @@ class BackTop extends Component {
       show: show
     });
   }
-  // weapp
-  onPageScroll =  (e) => {
-    const scrollTop = e.scrollTop
-    const show = scrollTop > 500 ? true : false
-    this.setState({ show: show });
-  }
-
   goTop = () => {
     if (utils.getEnv() == 'WEB') {
       this.componentScrollBox.scrollTop = 0;
